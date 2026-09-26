@@ -6,6 +6,11 @@
 *Organization:* All India Council for Technical Education (AICTE) — Cyber Security Cell  
 *Theme:* Blockchain & Cybersecurity  
 
+### 🌐 Live Production Deployments
+- 🖥️ **Live Bloomberg Terminal Dashboard**: **[https://guardianoc.vercel.app](https://guardianoc.vercel.app)** *(Hosted on Vercel Edge)*
+- ⚙️ **Live FastAPI Backend & ML Engine**: **[https://guardianoc.onrender.com](https://guardianoc.onrender.com)** *(Hosted on Render)*
+- 📖 **Live Interactive API Documentation**: **[https://guardianoc.onrender.com/docs](https://guardianoc.onrender.com/docs)** *(Swagger / OpenAPI)*
+
 ---
 
 ## 1. Product Framing
