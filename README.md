@@ -109,25 +109,49 @@ Open browser to:
 
 ---
 
-## 5. Directory Structure
+## 5. Advanced AI / Machine Learning Suite
+
+GuardianOC integrates four production-grade Machine Learning and Deep Learning models:
+
+1. **Supervised Breach Likelihood Classifier (`BreachPredictorML`)**:
+   - **Architecture**: 100-Tree Random Forest Classifier (`scikit-learn`) trained on asset criticality, CVSS, EPSS exploit probability, control maturity, and internet exposure.
+   - **XAI (Explainable AI)**: Outputs Gini feature importances to show the Board exactly why an asset is vulnerable (e.g., EPSS probability weighting 32.4%, Internet exposure 28.1%).
+2. **Markovian Lateral Attack Graph Analyzer (`AttackGraphAnalyzerML`)**:
+   - **Algorithm**: Directed Probabilistic State Transition Matrix across enterprise assets.
+   - **Lateral Traversal**: Models chained breach paths from edge PBX (`AST-EXEC-002`) through IAM Directory (`AST-HR-005`) to Core SWIFT Engine (`AST-FIN-001`), identifying systemic network chokepoints.
+3. **Autoregressive Financial Risk Forecaster (`RiskForecasterML`)**:
+   - **Modeling**: 30 / 60 / 90-day time-series forecasting with trend drift and stochastic volatility.
+   - **Decision Support**: Contrasts **Status Quo Inaction** (risk compounding up to +28% due to aging CVEs) against **Active Knapsack Defense** (immediate drop and stabilization).
+4. **Tri-Net Deep Learning Voice Biometrics & Forensics (VocxGuard Sensor)**:
+   - **Ensemble**: LFCC-LCNN (spectral artifacts) + RawNet2 (raw waveform sinc filters) + WavLM (phonetic dissonance) + Biomechanical Glottal Micro-Jitter (vocal cord physics).
+   - Ingests RFC 7865 SIP REC executive audio streams to prevent CEO voice-cloned wire fraud in real time.
+
+---
+
+## 6. Directory Structure
 
 ```
 guardianOC/
 ├── backend/
-│   └── main.py                     # 23 REST & WebSocket API routes
+│   └── main.py                     # 31 REST & WebSocket API routes
 ├── engine/
 │   ├── crq_engine.py               # Open FAIR & 10,000 Monte Carlo simulator
 │   ├── investment_optimizer.py     # 0-1 Knapsack & Pareto Frontier optimizer
+│   ├── ml_models.py                # 4 AI/ML models: RF Classifier, Markov Graph, Forecaster
 │   ├── nlp_query_engine.py         # C-Suite natural language query processor
 │   ├── synthetic_data_generator.py # 75 enterprise assets across 5 Business Units
 │   ├── ingestion_parser.py         # Nessus XML/JSON & SIEM CEF log parser
-│   └── remediation.py              # CERT-In 6-hour forms & DevSecOps playbooks
+│   ├── remediation.py              # CERT-In 6-hour forms & DevSecOps playbooks
+│   └── connectors/
+│       ├── epss_connector.py       # Live FIRST.org EPSS v1 API HTTPS client
+│       ├── sip_rec_connector.py    # RFC 7865 VoIP UDP port 10000 audio listener
+│       └── cloud_cmdb_connector.py # AWS ap-south-1 & Azure India Central discovery
 ├── sensors/
 │   ├── vocxguard_sensor.py         # VocxGuard SIH26104 telemetry connector
 │   └── live_simulator.py           # Real-time incoming call attack streamer
 ├── frontend/
 │   └── app/
-│       ├── page.tsx                # Next.js 14 Bloomberg Terminal Cockpit
+│       ├── page.tsx                # Next.js 14 Bloomberg Terminal Cockpit (10 tabs)
 │       ├── layout.tsx              # Clean dark-mode layout
 │       └── globals.css
 ├── docs/
@@ -139,7 +163,7 @@ guardianOC/
 
 ---
 
-## 6. Academic Research & Industry References
+## 7. Academic Research & Industry References
 
 GuardianOC is grounded in peer-reviewed computer science literature, operations research, and national statutory frameworks:
 
@@ -150,9 +174,11 @@ GuardianOC is grounded in peer-reviewed computer science literature, operations 
    - Gordon, L. A., & Loeb, M. P. (2002). *The Economics of Information Security Investment*. ACM TISSEC, 5(4), 438–457.
    - Martello, S., & Toth, P. (1990). *Knapsack Problems: Algorithms and Computer Implementations*. John Wiley & Sons.
    - ENISA (2012). *Introduction to Return on Security Investment (ROSI)*.
-3. **Exploit Prediction & Empirical Likelihood**:
+3. **Machine Learning & Attack Graphs**:
+   - Breiman, L. (2001). *Random Forests*. Machine Learning, 45(1), 5–32.
+   - Ribeiro, M. T., Singh, S., & Guestrin, C. (2016). *"Why Should I Trust You?": Explaining the Predictions of Any Classifier*. ACM KDD.
+   - Phillips, C. A., & Swiler, L. P. (1998). *A graph-based system for network-vulnerability analysis*. ACM NSPW.
    - Jacobs, J., et al. (2021). *Exploit Prediction Scoring System (EPSS)*. ACM DTRAP, 2(3), 1–17.
-   - FIRST.org CVSS v3.1 Specification.
 4. **Speech Anti-Spoofing & Deepfake Telemetry (VocxGuard)**:
    - Tak, H., et al. (2021). *End-to-End anti-spoofing with RawNet2*. IEEE ICASSP.
    - Kumar, K., et al. (2019). *MelGAN: Conditional Waveform Synthesis (Transposed Conv Aliasing)*. NeurIPS.

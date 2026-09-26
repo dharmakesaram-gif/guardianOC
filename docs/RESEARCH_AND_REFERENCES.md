@@ -103,3 +103,24 @@ Rather than relying purely on static CVSS severity, GuardianOC queries the live 
 
 ### 5.5 NIST Cybersecurity Framework 2.0 (CSF 2.0)
 * **National Institute of Standards and Technology (2024).** *The NIST Cybersecurity Framework (CSF) 2.0*. NIST Special Publication SP 1299, U.S. Department of Commerce. DOI: 10.6028/NIST.SP.1299.
+
+---
+
+## 6. Machine Learning, Explainable AI & Graph Analytics Literature
+
+### 6.1 Supervised Random Forest Ensembles for Breach Likelihood
+* **Breiman, L. (2001).** *Random Forests*. Machine Learning, 45(1), 5–32. DOI: 10.1023/A:1010933404324.
+* **Bridges, R. A., et al. (2015).** *A survey of data science applied to cyber vulnerability assessment*. ACM Computing Surveys.
+
+### 6.2 Explainable AI (XAI) & Feature Importance in Cybersecurity
+* **Lundberg, S. M., & Lee, S.-I. (2017).** *A Unified Approach to Interpreting Model Predictions (SHAP)*. Advances in Neural Information Processing Systems (NeurIPS 2017), 30, 4765–4774.
+* **Ribeiro, M. T., Singh, S., & Guestrin, C. (2016).** *"Why Should I Trust You?": Explaining the Predictions of Any Classifier*. ACM SIGKDD International Conference on Knowledge Discovery and Data Mining (KDD '16), 1135–1144. DOI: 10.1145/2939672.2939778.
+
+### 6.3 Probabilistic Attack Graphs & Lateral Movement Modeling
+* **Phillips, C. A., & Swiler, L. P. (1998).** *A graph-based system for network-vulnerability analysis*. In Proceedings of the 1998 workshop on New security paradigms (NSPW '98), ACM, 71–79. DOI: 10.1145/310889.310919.
+* **Wang, L., Singhal, A., & Jajodia, S. (2006).** *Toward Measuring Network Security Using Attack Graphs*. ACM Workshop on Quality of Protection, 49–54.
+
+### 6.4 Autoregressive Time-Series & Cyber Loss Forecasting
+* **Box, G. E., Jenkins, G. M., Reinsel, G. C., & Ljung, G. M. (2015).** *Time Series Analysis: Forecasting and Control* (5th ed.). John Wiley & Sons.
+* **Eling, M., & Wirfs, J. (2019).** *What are the characteristics of extreme cyber risks, that are relevant for insurance?*. Journal of Risk and Insurance, 86(3), 643–674.
+
