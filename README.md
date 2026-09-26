@@ -107,6 +107,16 @@ Open browser to:
 - **Bloomberg Terminal Dashboard**: `http://localhost:3000`
 - **FastAPI Interactive Docs**: `http://127.0.0.1:8000/docs`
 
+### Production Deployment (Docker Compose / Cloud)
+```bash
+# 1. Enterprise Docker Compose (Nginx + FastAPI + Next.js + Redis)
+docker compose -f docker-compose.prod.yml up -d --build
+
+# 2. Render.com / Railway 1-Click
+# Use the included render.yaml blueprint or railway.json
+```
+👉 *For 1-click Vercel + Render, AWS EC2, and Cloudflare Tunnel deployment instructions, read [docs/PRODUCTION_DEPLOYMENT_GUIDE.md](docs/PRODUCTION_DEPLOYMENT_GUIDE.md).*
+
 ---
 
 ## 5. Advanced AI / Machine Learning Suite

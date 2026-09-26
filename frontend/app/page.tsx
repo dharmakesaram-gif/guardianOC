@@ -96,6 +96,8 @@ interface TelemetryEvent {
   details: any;
 }
 
+const API_BASE = process.env.NEXT_PUBLIC_API_URL || "http://127.0.0.1:8000";
+
 export default function GuardianOCBloombergTerminal() {
   const [activeTab, setActiveTab] = useState<"overview" | "assets" | "optimizer" | "whatif" | "nlp" | "telemetry" | "ingest" | "certin" | "compliance" | "ml">("overview");
   const [currency, setCurrency] = useState<"INR" | "USD">("INR");
@@ -155,7 +157,7 @@ export default function GuardianOCBloombergTerminal() {
   // Fetch initial CRQ overview
   const fetchCRQ = async () => {
     try {
-      const res = await fetch("http://127.0.0.1:8000/api/crq/overview");
+      const res = await fetch(`${API_BASE}/api/crq/overview`);
       if (res.ok) {
         const data = await res.json();
         setCrqOverview(data);
@@ -168,7 +170,7 @@ export default function GuardianOCBloombergTerminal() {
   // Fetch asset inventory
   const fetchAssets = async () => {
     try {
-      const res = await fetch("http://127.0.0.1:8000/api/assets");
+      const res = await fetch(`${API_BASE}/api/assets`);
       if (res.ok) {
         const data = await res.json();
         setAssets(data);
@@ -179,7 +181,7 @@ export default function GuardianOCBloombergTerminal() {
   // Run budget optimization
   const runOptimization = async (targetBudget: number) => {
     try {
-      const res = await fetch("http://127.0.0.1:8000/api/optimizer/allocate", {
+      const res = await fetch(`${API_BASE}/api/optimizer/allocate`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ budget: targetBudget, mandatory_controls: [] }),
@@ -194,7 +196,7 @@ export default function GuardianOCBloombergTerminal() {
   // Fetch telemetry events
   const fetchTelemetry = async () => {
     try {
-      const res = await fetch("http://127.0.0.1:8000/api/telemetry/history");
+      const res = await fetch(`${API_BASE}/api/telemetry/history`);
       if (res.ok) {
         const data = await res.json();
         setTelemetryEvents(data);
@@ -207,7 +209,7 @@ export default function GuardianOCBloombergTerminal() {
     const q = queryText || nlpQuery;
     setIsQuerying(true);
     try {
-      const res = await fetch("http://127.0.0.1:8000/api/nlp/query", {
+      const res = await fetch(`${API_BASE}/api/nlp/query`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ query: q }),
@@ -217,7 +219,7 @@ export default function GuardianOCBloombergTerminal() {
         setNlpResult(data);
       }
     } catch (e) {
-      alert("Please ensure GuardianOC backend is running on http://127.0.0.1:8000");
+      alert(`Please ensure GuardianOC backend is running on ${API_BASE}`);
     } finally {
       setIsQuerying(false);
     }
@@ -228,7 +230,7 @@ export default function GuardianOCBloombergTerminal() {
     const updated = { ...whatIfControls, [key]: !whatIfControls[key as keyof typeof whatIfControls] };
     setWhatIfControls(updated);
     try {
-      const res = await fetch("http://127.0.0.1:8000/api/scenarios/simulate-what-if", {
+      const res = await fetch(`${API_BASE}/api/scenarios/simulate-what-if`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(updated),
@@ -245,7 +247,7 @@ export default function GuardianOCBloombergTerminal() {
     setIsIngesting(true);
     setIngestionStatus("Parsing Nessus scan & correlating CVEs with enterprise assets...");
     try {
-      const res = await fetch("http://127.0.0.1:8000/api/ingest/scan", {
+      const res = await fetch(`${API_BASE}/api/ingest/scan`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({}),
@@ -268,7 +270,7 @@ export default function GuardianOCBloombergTerminal() {
   const handleTestLiveEpss = async () => {
     setTestingEpss(true);
     try {
-      const res = await fetch("http://127.0.0.1:8000/api/connectors/live-epss/CVE-2024-3400");
+      const res = await fetch(`${API_BASE}/api/connectors/live-epss/CVE-2024-3400`);
       if (res.ok) {
         const data = await res.json();
         setLiveEpss(data);
@@ -280,7 +282,7 @@ export default function GuardianOCBloombergTerminal() {
   // Check SIP REC Status
   const handleCheckSipRec = async () => {
     try {
-      const res = await fetch("http://127.0.0.1:8000/api/connectors/sip-rec/status");
+      const res = await fetch(`${API_BASE}/api/connectors/sip-rec/status`);
       if (res.ok) setSipRecInfo(await res.json());
     } catch (e) {}
   };
@@ -288,7 +290,7 @@ export default function GuardianOCBloombergTerminal() {
   // Sync Cloud CMDB
   const handleSyncCloudCmdb = async () => {
     try {
-      const res = await fetch("http://127.0.0.1:8000/api/connectors/cloud-cmdb/sync", { method: "POST" });
+      const res = await fetch(`${API_BASE}/api/connectors/cloud-cmdb/sync`, { method: "POST" });
       if (res.ok) setCmdbSyncInfo(await res.json());
     } catch (e) {}
   };
@@ -297,7 +299,7 @@ export default function GuardianOCBloombergTerminal() {
   const handleRunMLBreachPredict = async () => {
     setIsInferencingML(true);
     try {
-      const res = await fetch(`http://127.0.0.1:8000/api/ml/breach-predict?cvss=${mlCvss}&epss=${mlEpss}&maturity=${mlMaturity}&days_unpatched=${mlDaysUnpatched}`);
+      const res = await fetch(`${API_BASE}/api/ml/breach-predict?cvss=${mlCvss}&epss=${mlEpss}&maturity=${mlMaturity}&days_unpatched=${mlDaysUnpatched}`);
       if (res.ok) setMlBreachResult(await res.json());
     } catch (e) {}
     setIsInferencingML(false);
@@ -306,7 +308,7 @@ export default function GuardianOCBloombergTerminal() {
   // Fetch Attack Graph Traversal & Chokepoints
   const handleFetchAttackGraph = async () => {
     try {
-      const res = await fetch("http://127.0.0.1:8000/api/ml/attack-graph");
+      const res = await fetch(`${API_BASE}/api/ml/attack-graph`);
       if (res.ok) setMlGraphResult(await res.json());
     } catch (e) {}
   };
@@ -314,7 +316,7 @@ export default function GuardianOCBloombergTerminal() {
   // Fetch Predictive 30/60/90-Day Financial Forecaster
   const handleFetchForecast = async () => {
     try {
-      const res = await fetch("http://127.0.0.1:8000/api/ml/forecast");
+      const res = await fetch(`${API_BASE}/api/ml/forecast`);
       if (res.ok) setMlForecastResult(await res.json());
     } catch (e) {}
   };
@@ -322,7 +324,7 @@ export default function GuardianOCBloombergTerminal() {
   // Generate CERT-In Report
   const handleGenerateCertIn = async () => {
     try {
-      const res = await fetch("http://127.0.0.1:8000/api/remediation/certin-draft", {
+      const res = await fetch(`${API_BASE}/api/remediation/certin-draft`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -342,7 +344,7 @@ export default function GuardianOCBloombergTerminal() {
   // Fetch Boardroom Audit
   const handleFetchBoardroomAudit = async () => {
     try {
-      const res = await fetch("http://127.0.0.1:8000/api/reports/boardroom-audit");
+      const res = await fetch(`${API_BASE}/api/reports/boardroom-audit`);
       if (res.ok) {
         const data = await res.json();
         setBoardroomAuditText(data.report_text);
@@ -355,7 +357,7 @@ export default function GuardianOCBloombergTerminal() {
   const handleSimulateAttack = async () => {
     setIsSimulating(true);
     try {
-      const res = await fetch("http://127.0.0.1:8000/api/telemetry/simulate-attack", {
+      const res = await fetch(`${API_BASE}/api/telemetry/simulate-attack`, {
         method: "POST",
       });
       if (res.ok) {
@@ -367,7 +369,7 @@ export default function GuardianOCBloombergTerminal() {
         if (optimization) runOptimization(budget);
       }
     } catch (e) {
-      alert("Please ensure GuardianOC backend is running on http://127.0.0.1:8000");
+      alert(`Please ensure GuardianOC backend is running on ${API_BASE}`);
     } finally {
       setIsSimulating(false);
     }
@@ -375,7 +377,7 @@ export default function GuardianOCBloombergTerminal() {
 
   const handleResetTelemetry = async () => {
     try {
-      await fetch("http://127.0.0.1:8000/api/telemetry/reset", { method: "POST" });
+      await fetch(`${API_BASE}/api/telemetry/reset`, { method: "POST" });
       setThreatMultiplier(1.0);
       await fetchCRQ();
       await fetchTelemetry();
@@ -391,7 +393,7 @@ export default function GuardianOCBloombergTerminal() {
     fetchTelemetry();
     handleExecuteNLP("What is the highest financial risk today?");
 
-    fetch("http://127.0.0.1:8000/api/scenarios/simulate-what-if", {
+    fetch(`${API_BASE}/api/scenarios/simulate-what-if`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(whatIfControls),
