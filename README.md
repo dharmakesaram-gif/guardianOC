@@ -131,7 +131,37 @@ guardianOC/
 │       ├── layout.tsx              # Clean dark-mode layout
 │       └── globals.css
 ├── docs/
-│   └── SIH26105_PITCH.md           # 10-slide presentation deck & judge Q&A guide
+│   ├── SIH26105_PITCH.md           # 10-slide presentation deck & judge Q&A guide
+│   └── RESEARCH_AND_REFERENCES.md  # Formal academic citations, math proofs & statutory acts
 ├── requirements.txt
 └── start_guardianoc.bat
 ```
+
+---
+
+## 6. Academic Research & Industry References
+
+GuardianOC is grounded in peer-reviewed computer science literature, operations research, and national statutory frameworks:
+
+1. **Open FAIR Standard & Quantitative Modeling**:
+   - Freund, J., & Jones, J. (2014). *Measuring and Managing Information Risk: A FAIR Approach*. Elsevier.
+   - ISO/IEC 27005:2022 (Information Security Risk Management).
+2. **Economic Optimization & Budgeting**:
+   - Gordon, L. A., & Loeb, M. P. (2002). *The Economics of Information Security Investment*. ACM TISSEC, 5(4), 438–457.
+   - Martello, S., & Toth, P. (1990). *Knapsack Problems: Algorithms and Computer Implementations*. John Wiley & Sons.
+   - ENISA (2012). *Introduction to Return on Security Investment (ROSI)*.
+3. **Exploit Prediction & Empirical Likelihood**:
+   - Jacobs, J., et al. (2021). *Exploit Prediction Scoring System (EPSS)*. ACM DTRAP, 2(3), 1–17.
+   - FIRST.org CVSS v3.1 Specification.
+4. **Speech Anti-Spoofing & Deepfake Telemetry (VocxGuard)**:
+   - Tak, H., et al. (2021). *End-to-End anti-spoofing with RawNet2*. IEEE ICASSP.
+   - Kumar, K., et al. (2019). *MelGAN: Conditional Waveform Synthesis (Transposed Conv Aliasing)*. NeurIPS.
+   - Chen, S., et al. (2022). *WavLM: Large-scale self-supervised pre-training*. IEEE JSTSP.
+   - IETF RFC 7865: Session Initiation Protocol (SIP) Recording Metadata.
+5. **National Cyber Sovereignty & Indian Legislation**:
+   - **The Digital Personal Data Protection Act, 2023 (DPDP Act 2023)**, Section 8(5) & Section 33 (Penalties up to ₹250 Crores).
+   - **CERT-In Directions (April 2022)**, Section 70B(6) of IT Act, 2000 (Mandatory 6-hour incident disclosure).
+   - **RBI Master Direction on IT Governance & Risk (2023)** & **SEBI CSCRF 2024**.
+
+👉 *For full mathematical derivations, KaTeX proofs, and IEEE/ACM citations, read [docs/RESEARCH_AND_REFERENCES.md](docs/RESEARCH_AND_REFERENCES.md).*
+
